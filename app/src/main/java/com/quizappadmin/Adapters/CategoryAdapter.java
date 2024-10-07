@@ -9,38 +9,53 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.quizappadmin.Models.CategoryModel;
+import com.quizappadmin.R;
+import com.quizappadmin.databinding.RvCategoryDesignBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHolder> {
     Context context;
-    ArrayList<CategoryModel> models;
+    ArrayList<CategoryModel> list;
 
-    public CategoryAdapter(Context context, ArrayList<CategoryModel> models) {
+    public CategoryAdapter(Context context, ArrayList<CategoryModel> list) {
         this.context = context;
-        this.models = models;
+        this.list = list;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate()
-        return null;
+        View view= LayoutInflater.from(context).inflate(R.layout.rv_category_design, parent,false);
+        return new viewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
+        CategoryModel categoryModel = list.get(position);
+
+        holder.binding.categoryName.setText(categoryModel.getCategoryName());
+
+        Picasso.get()
+                .load(categoryModel.getCategoryImage())
+                .placeholder(R.drawable.admin1)
+                .into(holder.binding.categoryImages);
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class viewHolder extends RecyclerView.ViewHolder{
+        RvCategoryDesignBinding binding;
     public viewHolder(@NonNull View itemView){
+
         super(itemView);
+        binding = RvCategoryDesignBinding.bind(itemView);
     }
 }
 }

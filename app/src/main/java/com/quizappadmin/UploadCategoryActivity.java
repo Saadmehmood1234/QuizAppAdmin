@@ -42,6 +42,7 @@ Uri imageUri;
 
       database=FirebaseDatabase.getInstance();
       storage=FirebaseStorage.getInstance();
+
       loadingDialog=new Dialog(this);
       loadingDialog.setContentView(R.layout.loading_dialog);
       loadingDialog.setCancelable(false);
