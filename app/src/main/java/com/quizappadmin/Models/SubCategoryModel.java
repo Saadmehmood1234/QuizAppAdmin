@@ -1,25 +1,18 @@
 package com.quizappadmin.Models;
 
-public class CategoryModel {
+public class SubCategoryModel {
 
     private String categoryName;
-    private String categoryImage;
     private String key;
 
     // No-argument constructor
-    public CategoryModel() {
+    public SubCategoryModel() {
         // Required for Firebase
     }
 
     // Constructor with category name
-    public CategoryModel(String categoryName) {
+    public SubCategoryModel(String categoryName) {
         this.categoryName = categoryName;
-    }
-
-    // Constructor with category name and category image
-    public CategoryModel(String categoryName, String categoryImage) {
-        this.categoryName = categoryName;
-        this.categoryImage = categoryImage;
     }
 
     // Getter and Setter methods
@@ -31,13 +24,6 @@ public class CategoryModel {
         this.categoryName = categoryName;
     }
 
-    public String getCategoryImage() {
-        return categoryImage;
-    }
-
-    public void setCategoryImage(String categoryImage) {
-        this.categoryImage = categoryImage;
-    }
 
     public String getKey() {
         return key;

@@ -40,7 +40,7 @@ Dialog loadingDialog;
         setContentView(binding.getRoot());
 
         database = FirebaseDatabase .getInstance();
-        list = new ArrayList<>()
+        list = new ArrayList<>();
 
 
         loadingDialog=new Dialog(this);
@@ -84,7 +84,7 @@ Dialog loadingDialog;
                 loadingDialog.dismiss();
                 Toast.makeText(MainActivity.this, error.getMessage().toString(), Toast.LENGTH_SHORT).show();
             }
-        })
+        });
 
     binding.uploadCategory.setOnClickListener(new View.OnClickListener() {
     @Override
