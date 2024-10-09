@@ -1,6 +1,7 @@
 package com.quizappadmin.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.quizappadmin.Models.CategoryModel;
 import com.quizappadmin.R;
+import com.quizappadmin.SubCategoryActivity;
 import com.quizappadmin.databinding.RvCategoryDesignBinding;
 import com.squareup.picasso.Picasso;
 
@@ -42,6 +44,16 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
                 .load(categoryModel.getCategoryImage())
                 .placeholder(R.drawable.admin1)
                 .into(holder.binding.categoryImages);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(context,SubCategoryActivity.class);
+                intent.putExtra("catId",categoryModel.getKey());
+                context.startActivity(intent);
+            }
+        });
 
     }
 
