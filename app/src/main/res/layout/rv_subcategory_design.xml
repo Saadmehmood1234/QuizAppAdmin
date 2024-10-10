@@ -27,6 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
-            tools:srcCompat="@drawable/forward" />
+            android:src="@drawable/forward" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

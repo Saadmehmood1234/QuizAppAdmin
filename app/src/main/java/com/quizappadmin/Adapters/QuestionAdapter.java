@@ -9,27 +9,25 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.quizappadmin.Models.CategoryModel;
+import com.quizappadmin.Models.QuestionsModel;
 import com.quizappadmin.Models.SubCategoryModel;
 import com.quizappadmin.QuestionsActivity;
 import com.quizappadmin.R;
-import com.quizappadmin.SubCategoryActivity;
-import com.quizappadmin.databinding.RvCategoryDesignBinding;
 import com.quizappadmin.databinding.RvSubcategoryDesignBinding;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.viewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.viewHolder> {
     Context context;
-    ArrayList<SubCategoryModel> list;
+    ArrayList<QuestionsModel> list;
     private String catId;
-    private String subCatId;
+  private String subCatId;
 
-    public SubCategoryAdapter(Context context, ArrayList<SubCategoryModel> list, String catId) {
+    public QuestionAdapter(Context context, ArrayList<QuestionsModel> list, String catId, String subCatId) {
         this.context = context;
         this.list = list;
         this.catId = catId;
+        this.subCatId = subCatId;
     }
 
     @NonNull
@@ -42,19 +40,10 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
-        SubCategoryModel categoryModel = list.get(position);
+        QuestionsModel questionModel = list.get(position);
 
-        holder.binding.subCategoryName.setText(categoryModel.getCategoryName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        holder.binding.subCategoryName.setText(questionModel.getQuestion());
 
-                Intent intent = new Intent(context, QuestionsActivity.class);
-                intent.putExtra("catId",catId);
-                intent.putExtra("subCatId",categoryModel.getKey());
-                context.startActivity(intent);
-            }
-        });
 
 
     }
