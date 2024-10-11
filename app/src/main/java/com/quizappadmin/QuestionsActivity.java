@@ -13,6 +13,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -53,7 +54,7 @@ public class QuestionsActivity extends AppCompatActivity {
         loadingDialog.setCancelable(true);
         loadingDialog.show();
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this,2);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.rvQuestions.setLayoutManager(layoutManager);
 
         adapter = new QuestionAdapter(this,list,catId,subCatId);

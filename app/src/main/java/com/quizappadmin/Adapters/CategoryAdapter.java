@@ -1,14 +1,18 @@
 package com.quizappadmin.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.FirebaseDatabase;
 import com.quizappadmin.Models.CategoryModel;
 import com.quizappadmin.R;
 import com.quizappadmin.SubCategoryActivity;
@@ -52,6 +56,41 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
                 Intent intent = new Intent(context,SubCategoryActivity.class);
                 intent.putExtra("catId",categoryModel.getKey());
                 context.startActivity(intent);
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setTitle("Delete");
+                builder.setMessage("Are you sure, you want to delete this category");
+
+                builder.setPositiveButton("Yes",(dialogInterface, i) -> {
+
+                    FirebaseDatabase.getInstance().getReference().child("categories").child(categoryModel.getKey())
+                            .removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                    Toast.makeText(context, "deleted", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+                });
+                builder.setNegativeButton("No",(dialogInterface, i) -> {
+
+                    dialogInterface.cancel();
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+
+
+
+                return false;
             }
         });
 
