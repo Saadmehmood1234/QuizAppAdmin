@@ -51,33 +51,33 @@ Dialog loadingDialog;
         binding.btnUploadQuestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int correct=-1;
-                for(int i=0;i<options.getChildCount();i++){
-                    EditText answ=(EditText) answers.getChildAt(i);
-                    if(answ.getText().toString().isEmpty()){
+                int correct = -1;
+                for (int i = 0; i < options.getChildCount(); i++) {
+                    EditText answ = (EditText) answers.getChildAt(i);
+                    if (answ.getText().toString().isEmpty()) {
                         answ.setError("Required");
                         return;
                     }
-                    RadioButton radioButton=(RadioButton) options.getChildAt(i);
-                    if(radioButton.isChecked()){
-                        correct=1;
+                    RadioButton radioButton = (RadioButton) options.getChildAt(i);
+                    if (radioButton.isChecked()) {
+                        correct = i;
                         break;
                     }
                 }
-                if(correct==-1){
-                    Toast.makeText(UploadQuestionsActivity.this,"select correct option",Toast.LENGTH_SHORT).show();
+                if (correct == -1) {
+                    Toast.makeText(UploadQuestionsActivity.this, "Select correct option", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 loadingDialog.show();
 
-                QuestionsModel model=new QuestionsModel();
+                QuestionsModel model = new QuestionsModel();
                 model.setQuestion(binding.editQuestion.getText().toString());
-                model.setOptionA(((EditText)answers.getChildAt(0)).getText().toString());
-                model.setOptionB(((EditText)answers.getChildAt(1)).getText().toString());
-                model.setOptionC(((EditText)answers.getChildAt(2)).getText().toString());
-                model.setOptionD(((EditText)answers.getChildAt(3)).getText().toString());
-                model.setCorrectAnswer(((EditText)answers.getChildAt(correct)).getText().toString());
+                model.setOptionA(((EditText) answers.getChildAt(0)).getText().toString());
+                model.setOptionB(((EditText) answers.getChildAt(1)).getText().toString());
+                model.setOptionC(((EditText) answers.getChildAt(2)).getText().toString());
+                model.setOptionD(((EditText) answers.getChildAt(3)).getText().toString());
+                model.setCorrectAnswer(((EditText) answers.getChildAt(correct)).getText().toString());
 
                 database.getReference().child("categories").child(catId).child("subCategories").child(subCatId)
                         .child("questions")
@@ -85,9 +85,8 @@ Dialog loadingDialog;
                         .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
-
                                 loadingDialog.dismiss();
-                                Toast.makeText(UploadQuestionsActivity.this, "question uploaded", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UploadQuestionsActivity.this, "Question uploaded", Toast.LENGTH_SHORT).show();
                                 onBackPressed();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
@@ -97,9 +96,9 @@ Dialog loadingDialog;
                                 Toast.makeText(UploadQuestionsActivity.this, e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
-
             }
         });
+
 
     }
 }
